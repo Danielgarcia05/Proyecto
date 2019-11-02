@@ -46,10 +46,10 @@
                      <!--<img src="`public/images/${keep.ruta_img}`" width="150px" alt="">-->
                   </td>
                   <td>
-                  @{{ keep.url }}
+                     <a href="">@{{ keep.url }}</a>
                   </td>
-                  <td><a href="#"></a>Editar</td>
-                  <td><a href="#"></a>Eliminar</td>
+                  <td><a href="#">Editar</a></td>
+                  <td><a href="#">Eliminar</a></td>
                </tr>
             </tbody>
          </table>

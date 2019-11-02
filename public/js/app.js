@@ -49521,7 +49521,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     getKeeps: function getKeeps() {
       var _this = this;
 
-      axios.get('/peliculas').then(function (response) {
+      axios.get('/peli').then(function (response) {
         _this.keeps = response.data;
         console.log(response.data);
       });

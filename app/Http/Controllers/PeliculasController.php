@@ -16,12 +16,15 @@ class PeliculasController extends Controller
     public function index()
     {
         $peliculas=Pelicula::all();
-        $lista = $peliculas;
-        return $peliculas;
-        //return $lista;
-        //return view("peliculas.index", compact("peliculas"));
+        return view("peliculas.index", compact("peliculas"));
+        
     }
-
+    public function lista()
+    {
+        $peliculas=Pelicula::all();
+        return $peliculas;
+        
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -22,7 +22,7 @@ const app = new Vue({
       },
       methods: {
           getKeeps() {
-              axios.get('/peliculas')
+              axios.get('/peli')
               .then(response =>{
                     this.keeps = response.data;
                     console.log(response.data);
