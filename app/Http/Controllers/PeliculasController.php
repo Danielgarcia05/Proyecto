@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pelicula;
 use App\Http\Requests\CreatePeliculasRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PeliculasController extends Controller
 {
@@ -15,14 +16,32 @@ class PeliculasController extends Controller
      */
     public function index()
     {
-        $peliculas=Pelicula::all();
-        return view("peliculas.index", compact("peliculas"));
+        return $peliculas=Pelicula::all();
         
     }
     public function lista()
     {
-        $peliculas=Pelicula::all();
-        return $peliculas;
+        return $peliculas=Pelicula::all();
+    }
+    public function borrar($id)
+    {
+        $pelicula=Pelicula::findOrFail($id);
+        $pelicula->delete();
+        //return redirect("/peliculas");
+    }
+
+    public function agregar(Request $request)
+    {
+        $this->validate($request, [
+            'titulo' => 'required'
+        ]);
+        Pelicula::create($request->all());
+        
+    }
+
+    public function insert()
+    {
+            return view('insert');
         
     }
     /**
@@ -41,12 +60,17 @@ class PeliculasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePeliculasRequest $request)
+    public function store(Request $request)
     {   
+        $this->validate($request, [
+            'titulo' => 'required'
+        ]);
 
-        /*$pelicula=new Pelicula;
-        $pelicula->titulo=$request->titulo;
-        $pelicula->duracion=$request->duracion;
+        Pelicula::create($request->all());
+
+        return redirect("/peliculas");
+
+        /*$pelicula->duracion=$request->duracion;
         $pelicula->fecha=$request->fecha;
         $pelicula->genero=$request->genero;
         $pelicula->idioma=$request->idioma;
@@ -55,14 +79,14 @@ class PeliculasController extends Controller
         $pelicula->sinopsis=$request->sinopsis;
         $pelicula->save();*/
 
-        $entrada=$request->all();
+        /*$entrada=$request->all();
         if($archivo=$request->file('file')){
             $nombre=$archivo->getClientOriginalName();
             $archivo->move('images', $nombre);
             $entrada['ruta_img']=$nombre;
         }
-        Pelicula::create($entrada);
-        return redirect("/peliculas");
+        Pelicula::create($entrada);*/
+       
     }
 
     /**

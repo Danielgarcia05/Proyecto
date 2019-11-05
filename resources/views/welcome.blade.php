@@ -1,60 +1,70 @@
  @extends('layouts.app')
 
- @section('content')
-   <div id="app">
-      <div>
-         <h1>Peliculas</h1>
-      </div>
-      <div>
-         <table>
-            <thead>
-               <tr>
-                  <th> Titulo </th>
-                  <th> Duración </th>
-                  <th> &nbsp; </th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr v-for="keep in keeps">
-                  <td>
-                  @{{ keep.titulo }}
-                  </td>
-                  <td>
-                  @{{ keep.duracion }}
-                  </td>
-                  <td>
-                  @{{ keep.fecha }}
-                  </td>
-                  <td>
-                  @{{ keep.genero }}
-                  </td>
-                  <td>
-                  @{{ keep.idioma }}
-                  </td>
-                  <td>
-                  @{{ keep.calidad }}
-                  </td>
-                  <td>
-                  @{{ keep.subtitulos }}
-                  </td>
-                  <td>
-                  @{{ keep.sinopsis }}
-                  </td>
-                  <td>
-                     <img :src="'/images/' + keep.ruta_img" width="150px" alt="">
-                     
-                     <!--<img src="`public/images/${keep.ruta_img}`" width="150px" alt="">-->
-                  </td>
-                  <td>
-                     <a href="">@{{ keep.url }}</a>
-                  </td>
-                  <td><a href="#">Editar</a></td>
-                  <td><a href="#">Eliminar</a></td>
-               </tr>
-            </tbody>
-         </table>
-      </div><br>
-   </div>
 
+@section('content')
+   <div id="app">
+   <article id="inner-grid">
+      <hr>
+      <section id="barra">
+         <article>Titulo</article>
+         <article>Duración</article>
+         <article>Fecha</article>
+         <article>Genero</article>
+         <article>Idioma</article>
+         <article>Calidad</article>
+         <article>Subtitulos</article>
+         <article>Sinopsis</article>
+         <article>Portada</article>
+         <article>Url</article>
+         <article>Eliminar</article>
+      </section>
+
+
+      <section id="datos" v-for="keep in keeps">
+         <article>
+            <p>@{{ keep.titulo }}</p>
+         </article>
+         <article>
+            <p>@{{ keep.duracion }}</p>
+         </article>
+         <article>
+            <p>@{{ keep.fecha }}</p>
+         </article>
+         <article>
+            <p>@{{ keep.genero }}</p>
+         </article>
+         <article>
+            <p>@{{ keep.idioma }}</p>
+         </article>
+         <article>
+            <p>@{{ keep.calidad }}</p>
+         </article>
+         <article>
+            <p>@{{ keep.subtitulos }}</p>
+         </article>
+         <article class="sinopsis">
+            <p>@{{ keep.sinopsis }}</p>
+         </article>
+         <article> 
+            <p><img :src=" keep.ruta_img" width="150px" alt=""></p>
+         </article>
+         <article>
+            <p>
+               <a :href=" keep.url ">
+               @{{ keep.url }}
+               </a>
+            </p>
+         </article>
+         <article>
+            <p>
+               <a href="#" v-on:click.prevent="deleteKeep(keep)">
+                  <img src="https://image.flaticon.com/icons/png/512/61/61848.png" class="edit_icon" alt="">
+               </a>
+            </p>
+         </article>
+      </section>
+      <registro-component></registro-component>
+   </article>
+   </div>
  @endsection
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"> </script>

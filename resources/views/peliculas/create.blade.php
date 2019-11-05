@@ -9,7 +9,7 @@
 @section("content")
 <form class="myForm" method="post" action="/peliculas" enctype="multipart/form-data">
   <label for="titulos">Titulo </label>
-  <input type="text" v-model="titulo">
+  <input type="text" name="titulo">
   {{ csrf_field() }}
   <label for="duracion">Duración </label>
   <input type="text" name="duracion" required>

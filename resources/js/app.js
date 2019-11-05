@@ -9,8 +9,8 @@ Vue.use(VueAxios, axios);
 
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('peliculas', require('./components/PeliculasComponent.vue').default);
-Vue.component('photo', require('./components/Photo.vue'));
+Vue.component('registro-component', require('./components/FormComponent.vue').default);
+Vue.component('peliculas-component', require('./components/PeliculasComponent.vue').default);
 
 const app = new Vue({
     el: '#app',
@@ -18,7 +18,10 @@ const app = new Vue({
         this.getKeeps();
     },
     data: {
-        keeps: {}
+        keeps: [],
+        keep: {
+            titulo: '',
+        }
       },
       methods: {
           getKeeps() {
@@ -27,6 +30,22 @@ const app = new Vue({
                     this.keeps = response.data;
                     console.log(response.data);
               });
+          },
+          deleteKeep: function(keep){
+            var url = '/borrar/' + keep._id;
+            axios.delete(url).then(response => {
+                this.getKeeps();
+            });
+          },
+          createKeep: function(){
+              const peliculas ={
+                keep:this.titulo,
+              };
+              axios.post('/agregar', peliculas)
+              .then(response=>{
+                  this.keeps.push(response.data)
+                  this.keeps.titulo= '';
+              });
           }
-      },
+      }
 });
